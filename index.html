@@ -1,1 +1,511 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progetto Cybernetico | Portfolio</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #f59e0b;
+            --accent: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            --shadow-lg: 0 25px 50px -12px rgba(0,0,0,0.15);
+            --ease: cubic-bezier(0.4,0,0.2,1);
+            --radius: 12px;
+        }
 
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --dark: #f8fafc;
+                --light: #1e293b;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1 { 
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            line-height: 1.1;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 6vw, 3rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            margin: 1.5rem auto;
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 8rem 0;
+        }
+
+        /* Header Stile Originale */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(248,250,252,0.95);
+            backdrop-filter: blur(16px);
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.8rem;
+            letter-spacing: -0.5px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Nuove Sezioni */
+        .hero-project {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 60px;
+            position: relative;
+        }
+
+        .hero-project::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80vw;
+            height: 200px;
+            background: var(--gradient);
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .project-overview {
+            background: var(--light);
+        }
+
+        .text-image-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin: 4rem 0;
+        }
+
+        .text-image-section.reverse {
+            direction: rtl;
+        }
+
+        .text-image-section.reverse > * {
+            direction: ltr;
+        }
+
+        .text-image-section img {
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s var(--ease);
+        }
+
+        .text-image-section img:hover {
+            transform: scale(1.02);
+        }
+
+        .text-content {
+            padding: 2rem;
+        }
+
+        .technical-specs {
+            background: linear-gradient(45deg, var(--light), #f1f5f9);
+            padding: 6rem 0;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .spec-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s var(--ease);
+        }
+
+        .spec-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .image-gallery {
+            columns: 3 300px;
+            gap: 1.5rem;
+            margin: 4rem 0;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: transform 0.3s var(--ease);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+
+        .development-process {
+            background: var(--dark);
+            color: white;
+            padding: 6rem 0;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 4rem auto;
+        }
+
+        .timeline-item {
+            padding: 2rem;
+            margin: 2rem 0;
+            background: rgba(255,255,255,0.1);
+            border-radius: var(--radius);
+            position: relative;
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s var(--ease);
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+        }
+
+        .challenges-section {
+            padding: 6rem 0;
+            background: linear-gradient(45deg, #f1f5f9, var(--light));
+        }
+
+        .challenge-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            border-top: 4px solid var(--secondary);
+        }
+
+        .solution {
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        /* Animazioni */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s var(--ease) forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .text-image-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .specs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">ProgettoX</a>
+            <ul class="nav-links">
+                <li><a href="#overview">Panoramica</a></li>
+                <li><a href="#specs">Specifiche</a></li>
+                <li><a href="#gallery">Galleria</a></li>
+                <li><a href="#process">Processo</a></li>
+                <li><a href="#challenges">Sfide</a></li>
+            </ul>
+            <button class="menu-toggle">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-project" id="overview">
+            <div class="container">
+                <div class="text-content">
+                    <h1>Progetto Cybernetico</h1>
+                    <p class="subtitle">Un sistema embedded avanzato per il monitoraggio ambientale</p>
+                    <p>Il progetto nasce dall'esigenza di monitorare parametri ambientali in tempo reale con precisione industriale, combinando tecnologie IoT avanzate con algoritmi di machine learning per l'analisi predittiva.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview Section -->
+        <section class="project-overview">
+            <div class="container">
+                <div class="text-image-section">
+                    <div class="text-content">
+                        <h2>Concetto Innovativo</h2>
+                        <p>Il cuore del sistema è un microcontrollore ESP32 programmato in C++ che gestisce una rete di sensori ambientali distribuiti. La particolarità risiede nell'architettura modulare che permette:</p>
+                        <ul>
+                            <li>Scalabilità orizzontale fino a 50 nodi</li>
+                            <li>Aggiornamenti firmware OTA</li>
+                            <li>Interoperabilità con protocolli standard</li>
+                        </ul>
+                        <p>Durante la fase di progettazione abbiamo ottimizzato il consumo energetico, raggiungendo un'autonomia di 72 ore con una batteria agli ioni di litio da 18650mAh.</p>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Schema progetto">
+                </div>
+
+                <div class="text-image-section reverse">
+                    <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a7f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Prototipo iniziale">
+                    <div class="text-content">
+                        <h3>Sviluppo del Prototipo</h3>
+                        <p>La fase prototipale ha richiesto 6 mesi di lavoro intensivo con iterazioni settimanali:</p>
+                        <ul>
+                            <li><strong>Mesi 1-2:</strong> Selezione componenti e test preliminari</li>
+                            <li><strong>Mesi 3-4:</strong> Ottimizzazione energetica e riduzione noise</li>
+                            <li><strong>Mesi 5-6:</strong> Integrazione cloud e testing sul campo</li>
+                        </ul>
+                        <p>Il design finale è stato influenzato dai risultati dei test di laboratorio che hanno evidenziato la necessità di un case termicamente conduttivo per dissipare il calore generato durante le operazioni intensive.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Specifiche Tecniche -->
+        <section class="technical-specs" id="specs">
+            <div class="container">
+                <h2>Specifiche Tecniche</h2>
+                <div class="specs-grid">
+                    <div class="spec-card">
+                        <h3>Componenti Elettronici</h3>
+                        <ul>
+                            <li><strong>Microcontrollore:</strong> ESP32-WROOM-32D</li>
+                            <li><strong>Sensori:</strong> DS18B20 (temperatura), BME680 (aria), SEN0161 (pH)</li>
+                            <li><strong>Comunicazione:</strong> WiFi 802.11 b/g/n, Bluetooth 4.2</li>
+                            <li><strong>Alimentazione:</strong> 3.3V DC, consumo medio 85mA</li>
+                        </ul>
+                    </div>
+                    <div class="spec-card">
+                        <h3>Prestazioni</h3>
+                        <p><strong>Autonomia:</strong> 72h (modalità standard)</p>
+                        <p><strong>Range operativo:</strong> -40°C ~ 85°C</p>
+                        <p><strong>Precisione:</strong> ±0.5°C (temperatura), ±3% RH (umidità)</p>
+                        <p><strong>Campionamento:</strong> 1Hz (max 10Hz burst)</p>
+                    </div>
+                    <div class="spec-card">
+                        <h3>Software</h3>
+                        <p><strong>Firmware:</strong> Arduino Core 3.0 con FreeRTOS</p>
+                        <p><strong>Protocolli:</strong> MQTT, HTTP REST</p>
+                        <p><strong>Dashboard:</strong> React.js con visualizzazione time-series</p>
+                        <p><strong>ML:</strong> Modelli TensorFlow Lite per anomaly detection</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galleria Immagini -->
+        <section class="container" id="gallery">
+            <h2>Galleria del Progetto</h2>
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Circuito stampato">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Interfaccia web">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Installazione sul campo">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Dettaglio sensori">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Testing laboratorio">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Team al lavoro">
+                </div>
+            </div>
+        </section>
+
+        <!-- Processo di Sviluppo -->
+        <section class="development-process" id="process">
+            <div class="container">
+                <h2>Cronologia dello Sviluppo</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Fase 1: Concettualizzazione (Settembre 2022)</h3>
+                        <p>Analisi del mercato e interviste con 15 potenziali utenti finali hanno rivelato la necessità di un sistema di monitoraggio ambientale a basso costo ma ad alta precisione. Abbiamo definito i requisiti tecnici e i vincoli progettuali.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Fase 2: Prototipazione (Novembre 2022 - Marzo 2023)</h3>
+                        <p>Sviluppo del primo MVP con funzionalità base di lettura sensori e trasmissione dati. I test iniziali hanno evidenziato problemi di stabilità della connessione WiFi in ambienti industriali.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Fase 3: Ottimizzazione (Aprile - Giugno 2023)</h3>
+                        <p>Riduzione del consumo energetico del 40% attraverso l'implementazione di algoritmi di sleep mode avanzati. Miglioramento della precisione dei sensori mediante calibrazione software.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sezione Sfide -->
+        <section class="challenges-section" id="challenges">
+            <div class="container">
+                <h2>Sfide e Soluzioni</h2>
+                <div class="grid-col-2">
+                    <div class="challenge-card">
+                        <h3>Gestione dell'Energia</h3>
+                        <p><strong>Problema:</strong> L'autonomia iniziale era limitata a 24 ore, insufficiente per le applicazioni sul campo.</p>
+                        <p class="solution"><strong>Soluzione:</strong> Implementazione di un sistema di sleep mode dinamico che riduce il consumo a 8μA durante i periodi di inattività, estendendo l'autonomia a 72 ore.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <h3>Connettività in Ambienti Ostili</h3>
+                        <p><strong>Problema:</strong> Instabilità della connessione WiFi in ambienti industriali con interferenze elettromagnetiche.</p>
+                        <p class="solution"><strong>Soluzione:</strong> Implementazione di un doppio protocollo di comunicazione (WiFi + BLE) con algoritmo di fallback automatico e buffer locale dei dati.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <h3>Calibrazione Sensori</h3>
+                        <p><strong>Problema:</strong> Deriva dei valori dei sensori dopo esposizione prolungata a condizioni estreme.</p>
+                        <p class="solution"><strong>Soluzione:</strong> Sviluppo di un algoritmo di auto-calibrazione basato su modelli fisici e machine learning che compensa la deriva in tempo reale.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <h3>Scalabilità</h3>
+                        <p><strong>Problema:</strong> Limitazione a 5 nodi nella prima versione del sistema.</p>
+                        <p class="solution"><strong>Soluzione:</strong> Ristrutturazione dell'architettura di rete con protocollo mesh personalizzato che supporta fino a 50 nodi con gestione dinamica del traffico.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Animazioni al scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Elementi da animare
+            const elementsToAnimate = [
+                ...document.querySelectorAll('.text-image-section'),
+                ...document.querySelectorAll('.spec-card'),
+                ...document.querySelectorAll('.timeline-item'),
+                ...document.querySelectorAll('.challenge-card'),
+                ...document.querySelectorAll('.gallery-item')
+            ];
+
+            elementsToAnimate.forEach(element => {
+                element.style.opacity = '0';
+                observer.observe(element);
+            });
+
+            // Menu mobile
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            menuToggle.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+        });
+    </script>
+</body>
+</html>
