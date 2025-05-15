@@ -1,0 +1,127 @@
+Codice riguardante l'ESP32-S3 montata sul rover con tutte le istruzione e vari casi riguardanti il controllo motori e la gestione delle variabili x e y ricevute dal sender.
+
+#include <WiFi.h>
+#include <esp_now.h>
+#include <ESP32Servo.h>
+
+Servo motor1, motor2;
+int motor1Pin = 13;
+int motor2Pin = 12;
+int minUs = 500, maxUs = 2500;
+int IN1 = 4, IN2 = 5, IN3 = 6, IN4 = 7, pta = 0, dis = 0, v = 0, V = 0;
+int x = -1, y = -1;               
+bool Ricevuto = false;  
+
+
+void onDataReceive(const esp_now_recv_info_t *info, const uint8_t *incomingData, int len) {
+
+  if (len == sizeof(int)) {
+    int receivedValue;
+    memcpy(&receivedValue, incomingData, sizeof(receivedValue));
+
+    if (!Ricevuto) {
+      // Store the first value
+      x = receivedValue;
+      Ricevuto = true;  
+      Serial.print("Valore ricevuto1 (x): ");
+      Serial.println(x);
+    } else {
+      // Store the second value
+      y = Ricevuto;
+      Ricevuto = false;  // Reset the flag
+      Serial.print("Valore ricevuto 2 (y): ");
+      Serial.println(y);
+    }
+  } else {
+    Serial.println("Error: Invalid data length received.");
+  }
+}
+
+
+
+void vel(int &v, int &V, int pta, int dis) {
+
+  v = map(abs(pta), 0, 500, 0, 180);
+  V = abs(pta) - abs(dis);
+  V = map(abs(V), 0, 500, 0, 180);
+}
+
+void setup() {
+  Serial.begin(115200);
+  motor1.attach(motor1Pin, minUs, maxUs);
+  motor2.attach(motor2Pin, minUs, maxUs);
+
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+
+
+  WiFi.mode(WIFI_STA);
+  if (esp_now_init() != ESP_OK) {
+    Serial.println("ESP-NOW inizializzazione fallita");
+    return;
+  }
+
+  esp_now_register_recv_cb(onDataReceive);
+  Serial.println("ESP32 pronta!");
+}
+
+
+
+void loop() {
+  pta = y - 512;
+  dis = x - 512;
+
+  //caso input lungo l'asse y
+  if ((x < 550) && (x > 350)) {
+    if (pta > 0) {
+      digitalWrite(IN1, LOW);
+      digitalWrite(IN2, HIGH);
+      digitalWrite(IN3, HIGH);
+      digitalWrite(IN4, LOW);
+    } else {
+      digitalWrite(IN1, HIGH);
+      digitalWrite(IN2, LOW);
+      digitalWrite(IN3, LOW);
+      digitalWrite(IN4, HIGH);    
+    }
+    motor1.write(map(abs(pta), 0, 500, 0, 180));
+    motor2.write(map(abs(pta), 0, 500, 0, 180));
+
+    //ogni altro caso
+  } else {
+
+    vel(v, V, pta, dis);
+
+    if (pta > 0) {
+      digitalWrite(IN1, LOW);
+      digitalWrite(IN2, HIGH);
+      digitalWrite(IN3, HIGH);
+      digitalWrite(IN4, LOW);
+
+      if (dis > 0) {
+        motor1.write(v);
+        motor2.write(V);
+      } else {
+        motor1.write(V);
+        motor2.write(v);
+      }
+
+    } else {
+      digitalWrite(IN1, HIGH);
+      digitalWrite(IN2, LOW);
+      digitalWrite(IN3, LOW);
+      digitalWrite(IN4, HIGH);
+
+      if (dis > 0) {
+        motor1.write(v);
+        motor2.write(V);
+
+      } else {
+        motor1.write(V);
+        motor2.write(v);
+      }
+    }
+  }
+}
