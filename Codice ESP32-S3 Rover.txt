@@ -1,4 +1,6 @@
-Codice riguardante l'ESP32-S3 montata sul rover con tutte le istruzione e vari casi riguardanti il controllo motori e la gestione delle variabili x e y ricevute dal sender.
+
+
+*****Codice riguardante l'ESP32-S3 montata sul rover con tutte le istruzione e vari casi riguardanti il controllo motori e la gestione delle variabili x e y ricevute dal sender.*****
 
 #include <WiFi.h>
 #include <esp_now.h>
