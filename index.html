@@ -246,6 +246,9 @@
         .timeline-item:hover {
             transform: translateX(10px);
         }
+        .te{
+            color: black;
+        }
 
         .challenges-section {
             padding: 6rem 0;
@@ -344,9 +347,9 @@
                         <h3>Sviluppo del Prototipo</h3>
                         <p>La fase prototipale ha richiesto qualche mese di lavoro con iterazioni e revisioni settimanali:</p>
                         <ul>
-                            <li><strong>Primo mese</strong>Concretizzazione dell'idea e creazione del circuito</li>
-                            <li><strong>Secondo mese</strong>Ultimi testi relativi ai due circuiti ed eventuali ottimizzazioni</li>
-                            <li><strong>Terzo mese</strong> Creazione delle parti del rover e ultimi test</li>
+                            <li><strong>Primo mese: </strong>Concretizzazione dell'idea e creazione del circuito</li>
+                            <li><strong>Secondo mese: </strong>Ultimi testi relativi ai due circuiti ed eventuali ottimizzazioni</li>
+                            <li><strong>Terzo mese: </strong> Creazione delle parti del rover e ultimi test</li>
                         </ul>
                         <p>Il design finale è stato influenzato da varie prove e tentativi per cercare di trovare la soluzione miglirore e più efficente</p>
                     </div>
@@ -363,8 +366,8 @@
                         <h3>Componenti Elettronici</h3>
                         <ul>
                             <li><strong>Microcontrollore:</strong> ESP32-WROOM-S3</li>
-                            <li><strong>Motor-driver</strong> L298N Dual H-Bridge DC</li>
-                            <li><strong>Motori</strong>12V DC con trasmissione 400RPM </li>
+                            <li><strong>Motor-driver:</strong> L298N Dual H-Bridge DC</li>
+                            <li><strong>Motori: </strong>12V DC con trasmissione 400RPM </li>
                             <li><strong>Alimentazione:</strong>Batteria DJI 8.8V 2500 mhA</li>
                         </ul>
                     </div>
@@ -378,7 +381,7 @@
                         <h3>Dati vari</h3>
                         <ul>
                             <li><strong>Dimensioni Rover:</strong> 30x8,5 (cm)</li>
-                            <li><strong>Peso:</strong>~300gm</li>
+                            <li><strong>Peso:</strong>~300g</li>
                             <li><strong>Diametro ruote: </strong>14cm</li>
                             <li><strong>Dimensioni Sender: </strong>7,2x4 (cm)</li>
                         </ul>
@@ -413,26 +416,6 @@
         </section>
 
         <!-- Processo di Sviluppo -->
-        <section class="development-process" id="process">
-            <div class="container">
-                <h2>Cronologia dello Sviluppo</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <h3>Fase 1: Concettualizzazione (Settembre 2022)</h3>
-                        <p>Analisi del mercato e interviste con 15 potenziali utenti finali hanno rivelato la necessità di un sistema di monitoraggio ambientale a basso costo ma ad alta precisione. Abbiamo definito i requisiti tecnici e i vincoli progettuali.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>Fase 2: Prototipazione (Novembre 2022 - Marzo 2023)</h3>
-                        <p>Sviluppo del primo MVP con funzionalità base di lettura sensori e trasmissione dati. I test iniziali hanno evidenziato problemi di stabilità della connessione WiFi in ambienti industriali.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h3>Fase 3: Ottimizzazione (Aprile - Giugno 2023)</h3>
-                        <p>Riduzione del consumo energetico del 40% attraverso l'implementazione di algoritmi di sleep mode avanzati. Miglioramento della precisione dei sensori mediante calibrazione software.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Sezione Sfide -->
         <section class="challenges-section" id="challenges">
             <div class="container">
@@ -440,23 +423,23 @@
                 <div class="grid-col-2">
                     <div class="challenge-card">
                         <h3>Gestione dell'Energia</h3>
-                        <p><strong>Problema:</strong> L'autonomia iniziale era limitata a 24 ore, insufficiente per le applicazioni sul campo.</p>
-                        <p class="solution"><strong>Soluzione:</strong> Implementazione di un sistema di sleep mode dinamico che riduce il consumo a 8μA durante i periodi di inattività, estendendo l'autonomia a 72 ore.</p>
+                        <p class="te"><strong>Problema:</strong> Batterie con voltaggi e capacità troppo basse per i motori.</p>
+                        <p class="solution"><strong>Soluzione:</strong> Usare una batteria Li-Po di un drone DJI ad alta capacità ed a un voltaggio adeguato.</p>
                     </div>
                     <div class="challenge-card">
-                        <h3>Connettività in Ambienti Ostili</h3>
-                        <p><strong>Problema:</strong> Instabilità della connessione WiFi in ambienti industriali con interferenze elettromagnetiche.</p>
-                        <p class="solution"><strong>Soluzione:</strong> Implementazione di un doppio protocollo di comunicazione (WiFi + BLE) con algoritmo di fallback automatico e buffer locale dei dati.</p>
+                        <h3>Mancanza di Coppia</h3>
+                        <p class="te"><strong>Problema:</strong> Le ruote non riuscivano ad imprimere abbastanza forza e trazione sul terreno.</p>
+                        <p class="solution"><strong>Soluzione:</strong> Utilizzare ruote più leggere e piccole con vari accorgimenti sul design per imprimere più forza sul terreno.</p>
                     </div>
                     <div class="challenge-card">
-                        <h3>Calibrazione Sensori</h3>
-                        <p><strong>Problema:</strong> Deriva dei valori dei sensori dopo esposizione prolungata a condizioni estreme.</p>
-                        <p class="solution"><strong>Soluzione:</strong> Sviluppo di un algoritmo di auto-calibrazione basato su modelli fisici e machine learning che compensa la deriva in tempo reale.</p>
+                        <h3>Fragilità nella struttura</h3>
+                        <p class="te"><strong>Problema:</strong> Il primo design creato con un tubo di cartone non riusciva a gestire la coppia dei motori.</p>
+                        <p class="solution"><strong>Soluzione:</strong> Utilizzo di una struttura principale di natura plastica, più leggera e resistente.</p>
                     </div>
                     <div class="challenge-card">
-                        <h3>Scalabilità</h3>
-                        <p><strong>Problema:</strong> Limitazione a 5 nodi nella prima versione del sistema.</p>
-                        <p class="solution"><strong>Soluzione:</strong> Ristrutturazione dell'architettura di rete con protocollo mesh personalizzato che supporta fino a 50 nodi con gestione dinamica del traffico.</p>
+                        <h3>Connettività fra i due ESP32</h3>
+                        <p class="te"><strong>Problema:</strong> Difficoltà nel trasmettere variabili in modo veloce ed istantaneo.</p>
+                        <p class="solution"><strong>Soluzione:</strong> Utilizzo del sistema ESPNOW facilitando di molto la comunicazione fra i microcontrollori senza appesantire troppo il codice.</p>
                     </div>
                 </div>
             </div>
