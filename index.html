@@ -331,14 +331,14 @@
                 <div class="text-image-section">
                     <div class="text-content">
                         <h2>Concetto </h2>
-                        <p>Il cuore del sistema è un microcontrollore ESP32 S3 programmato in C++ attraverso l'ArduinoIDE che comunica con un'altro ESP32 attraverso il sistema ESPNOW esso infatti permette:</p>
+                        <p>Il cuore del sistema è un microcontrollore ESP32 S3 programmato in C++ attraverso l'ArduinoIDE che comunica con un'altro ESP32 attraverso il sistema ESPNOW esso infatti permette:<br> </p>
                         <ul>
-                            <li><br>La condivisione di variabili fra i microcontrollori</li>
+                            <li>La condivisione di variabili fra i microcontrollori</li>
                             <li>Facile gestione dei dati mandati/ricevuti</li>
                             <li>Ampio spettro e raggio di trasmissione</li>
                         </ul>
-                        <p><br>Dunque un primo microcontrollore, quello del sender, rileva la posizione grazie ad un joystick e manda le relative variabili ad un'altro ESP32 che si trova dentro il rover. 
-                            Esso poi elaborerà le varie posizioni ricevute dal Sender per controllare e gestire i motori apportunamente </p>
+                        <p><br>Dunque un primo microcontrollore, quello del sender, rileva la posizione grazie ad un joystick e manda le variabili (relative alla posizione) ad un'altro ESP32 che si trova dentro il rover. 
+                            Esso poi elaborerà le varie posizioni ricevute dal Sender per controllare e gestire i motori apportunamente. </p>
                     </div>
                     <img src="Sender.jpeg" alt="Prototipo iniziale">
                 </div>
@@ -347,13 +347,13 @@
                     <img src="Rover.jpeg" alt="Prototipo iniziale">
                     <div class="text-content">
                         <h3>Sviluppo del Prototipo</h3>
-                        <p>La fase prototipale ha richiesto qualche mese di lavoro con iterazioni e revisioni settimanali:</p>
+                        <p>La prima fase del prototipo ha richiesto qualche mese di lavoro con iterazioni e revisioni settimanali:</p>
                         <ul>
                             <li><strong>Primo mese: </strong>Concretizzazione dell'idea e creazione del circuito</li>
-                            <li><strong>Secondo mese: </strong>Ultimi testi relativi ai due circuiti ed eventuali ottimizzazioni</li>
+                            <li><strong>Secondo mese: </strong>Ultimi testi relativi ai due circuiti(Rover e Sender) ed eventuali ottimizzazioni</li>
                             <li><strong>Terzo mese: </strong> Creazione delle parti del rover e ultimi test</li>
                         </ul>
-                        <p>Il design finale è stato influenzato da varie prove e tentativi per cercare di trovare la soluzione miglirore e più efficente</p>
+                        <p>Il design finale è stato influenzato da varie prove e tentativi per cercare di trovare la soluzione migliore e più efficente.</p>
                     </div>
                 </div>
             </div>
@@ -377,13 +377,13 @@
                         <h3>Software</h3>
                         <a href="https://github.com/26Giammy/Rover/blob/main/Codice%20ESP32-S3%20Rover.txt"><strong>Codice:</strong> Link codice Rover</a>
                         <p><strong>Protocolli:</strong> ESPNOW, BLUETOOTH</p>
-                        <p><strong>Area di programmazione:</strong>ArduinoIDE</p>                      
+                        <p><strong>Area di programmazione: </strong>ArduinoIDE</p>                      
                     </div>
                       <div class="spec-card">
                         <h3>Dati vari</h3>
                         <ul>
                             <li><strong>Dimensioni Rover:</strong> 30x8,5 (cm)</li>
-                            <li><strong>Peso:</strong>~300g</li>
+                            <li><strong>Peso:</strong> ~300g</li>
                             <li><strong>Diametro ruote: </strong>14cm</li>
                             <li><strong>Dimensioni Sender: </strong>7,2x4 (cm)</li>
                         </ul>
@@ -430,7 +430,7 @@
                     <div class="challenge-card">
                         <h3>Gestione dell'Energia</h3>
                         <p class="te"><strong>Problema:</strong> Batterie con voltaggi e capacità troppo basse per i motori.</p>
-                        <p class="solution"><strong>Soluzione:</strong> Usare una batteria Li-Po di un drone DJI ad alta capacità ed a un voltaggio adeguato.</p>
+                        <p class="solution"><strong>Soluzione:</strong> Usare una batteria Li-Po di un drone DJI ad alta capacità ed elevato voltaggio.</p>
                     </div>
                     <div class="challenge-card">
                         <h3>Mancanza di Coppia</h3>
@@ -445,7 +445,7 @@
                     <div class="challenge-card">
                         <h3>Connettività fra i due ESP32</h3>
                         <p class="te"><strong>Problema:</strong> Difficoltà nel trasmettere variabili in modo veloce ed istantaneo.</p>
-                        <p class="solution"><strong>Soluzione:</strong> Utilizzo del sistema ESPNOW facilitando di molto la comunicazione fra i microcontrollori senza appesantire troppo il codice.</p>
+                        <p class="solution"><strong>Soluzione:</strong> Utilizzo del sistema ESPNOW facilitando notevolmente la comunicazione fra i microcontrollori senza appesantire troppo il codice.</p>
                     </div>
                 </div>
             </div>
